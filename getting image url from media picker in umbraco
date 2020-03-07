@@ -1,0 +1,32 @@
+This is my custom helper class to get image url from media picker component in umbraco cms.
+ public static class MediaHelper
+    {
+        // if you got content udi , used this method
+        //IContent
+        public static string GetImageUrl(this string imageUdi)
+        {
+            if(imageUdi !=null)
+            {
+                var guidUdi = Udi.Parse(imageUdi) as GuidUdi;
+                var helper = Umbraco.Web.Composing.Current.UmbracoHelper;
+                return helper.Media(guidUdi.Guid).Url;
+            }
+            else
+            {
+                return "Choose file first";
+            }
+        }
+        // if you got media content as a object , used this method
+        // IPublishedContent
+        public static string GetImageFromObjType(this object obj)
+        {
+            if (obj != null)
+            {
+               return obj.GetType().GetProperty("Url").GetValue(obj).ToString();
+            }
+            else
+            {
+                return "Choose file first";
+            }
+        }
+    }
