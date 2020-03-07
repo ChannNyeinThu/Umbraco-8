@@ -1,0 +1,18 @@
+Umbraco 8.0 now supports dependency injection out of the box. This means that you no longer have to install an external package such as Autofac in order to register your dependencies.
+
+Umbraco Composition represents only a minimalist DI abstraction defined by the IRegister interface. Out of the box Umbraco implements the IRegister interface using LightInject - an ultra lightweight Inversion of Control (IoC) container.
+
+
+Ok. Let take a look into my sample configuration for DI .
+
+1 . Create a File with your desired name "exmpleComposer".cs in your project.
+2 .This class must inherit from IUserComposer
+ public class exmpleComposer : IUserComposer
+{
+      public void Compose(Composition composition)
+      {
+            composition.Register(typeof(IContactUs), typeof(ContactUsRepository));
+            //Register your Dependency class here as the followng sampe step
+      }
+        
+}
