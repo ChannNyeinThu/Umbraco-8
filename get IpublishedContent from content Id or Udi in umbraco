@@ -1,0 +1,33 @@
+This is a smaple and easy to use custom helper to get IPublishedContent from content Id or Content Udi.
+ public static class ContentHelper
+    {
+        /// <summary>
+        /// Extension method to get IpublishedContent from content picker
+        /// Get Content By UDI from content picker component
+        /// </summary>
+        /// <param name="contentUdi"></param>
+        /// <returns></returns>
+        public static IPublishedContent GetContent(this string contentUdi)
+        {
+            var helper = Umbraco.Web.Composing.Current.UmbracoHelper;
+            try
+            {
+                var guidUdi = Udi.Parse(contentUdi) as GuidUdi;
+                
+                return helper.Content(guidUdi.Guid);
+            }
+            catch
+            {
+                return helper.Content((int)Utilities.Utility.PageIDMapping.DefaultCarMakerID);
+
+            }
+
+        }
+        //Get Content By ID
+        public static IPublishedContent GetContent(this int ID)
+        {
+            var helper = Umbraco.Web.Composing.Current.UmbracoHelper;
+            return helper.Content(ID);
+
+        }
+    }
