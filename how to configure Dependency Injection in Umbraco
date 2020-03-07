@@ -16,3 +16,5 @@ Ok. Let take a look into my sample configuration for DI .
       }
         
 }
+
+Reference from here : https://our.umbraco.com/documentation/reference/using-ioc/
