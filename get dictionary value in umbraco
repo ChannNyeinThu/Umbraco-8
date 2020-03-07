@@ -1,0 +1,26 @@
+My custom helper to get dictionary value from umbraco dictionary.You can also used umbraco build in method of getting dictionary item but sometimes your may found problem such as dicionary vlue in partial view.In thos case your can you my smaple custom helper .
+public static class DictionaryHelper
+    {
+        public static string Translate(string dictinaryValue,string fallbackText)
+        {
+            try
+            {
+                var helper = Umbraco.Web.Composing.Current.UmbracoHelper;
+                var data = helper.GetDictionaryValue(dictinaryValue);
+                if(data != "")
+                {
+                    return helper.GetDictionaryValue(dictinaryValue);
+                }
+
+                else
+                {
+                    return fallbackText;
+                }
+            }
+            catch
+            {
+                return fallbackText;
+            }
+          
+        }
+    }
